@@ -1,0 +1,2 @@
+class FmodToolkitError(RuntimeError):
+    pass

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+    <group
+        android:scaleX="0.58"
+        android:scaleY="0.58"
+        android:translateX="201.60000000000002"
+        android:translateY="201.60000000000002">
+
+        <!-- Outer cube -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="@android:color/white"
+            android:strokeWidth="70"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M480,200 L720,340 L720,620 L480,760 L240,620 L240,340 Z"/>
+
+        <!-- Top seam -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="@android:color/white"
+            android:strokeWidth="56"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M240,340 L480,480 L720,340"/>
+
+        <!-- Vertical seam -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="@android:color/white"
+            android:strokeWidth="56"
+            android:strokeLineCap="round"
+            android:pathData="M480,480 L480,760"/>
+    </group>
+</vector>

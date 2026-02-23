@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Darker navy gradient -->
+    <color name="uabe_icon_bg_start">#071A2B</color>
+    <color name="uabe_icon_bg_end">#0B2E4F</color>
+    <!-- Subtle ring (white @ ~18%) -->
+    <color name="uabe_icon_ring">#2EFFFFFF</color>
+</resources>

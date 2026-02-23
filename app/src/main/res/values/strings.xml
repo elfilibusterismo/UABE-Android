@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">UABE</string>
+
+    <string name="action_edit">Edit</string>
+    <string name="action_export_add">Export %s</string>
+    <string name="action_export_data">Export data…</string>
+    <string name="action_export_obj">Export OBJ…</string>
+    <string name="action_import_add">Import %s</string>
+    <string name="action_import_data">Import data…</string>
+    <string name="action_preview">Preview</string>
+
+    <string name="chip_edited">Edited</string>
+    <string name="chip_idx">Idx</string>
+    <string name="chip_name">Name</string>
+    <string name="chip_size">Size</string>
+    <string name="chip_type">Type</string>
+
+    <string name="menu_sort_edited">Modified</string>
+    <string name="menu_sort_idx">Index</string>
+    <string name="menu_sort_name">Name</string>
+    <string name="menu_sort_size">Size</string>
+    <string name="menu_sort_type">Type</string>
+    <string name="menu_title_close">Close</string>
+    <string name="menu_title_export">Export (Save As…)</string>
+    <string name="menu_title_open">Open</string>
+    <string name="menu_title_reload">Reload</string>
+    <string name="menu_title_sort">Sort</string>
+
+    <string name="message_browse">Browse…</string>
+    <string name="message_cannot_determine_import_mode">Cannot determine import mode.</string>
+    <string name="message_checking_import_mode">Checking import mode…</string>
+    <string name="message_close_current_bundle_view">This will close the current bundle view.\n\nThe file stays in Recents so you can reopen it later.</string>
+    <string name="message_close_the_current_bundle_and_open_the_new_one">Close the current bundle and open the new one?</string>
+    <string name="message_copy_failed">Copy failed: %s</string>
+    <string name="message_edit">Edit %s</string>
+    <string name="message_export_failed">Export failed:\n%s</string>
+    <string name="message_export_not_available_for_this_type">Export not available for this type.</string>
+    <string name="message_exported">Exported.</string>
+    <string name="message_exported_add">Exported %s.</string>
+    <string name="message_exported_obj">Exported OBJ.</string>
+    <string name="message_exported_object">Exported object.</string>
+    <string name="message_exporting">Exporting…</string>
+    <string name="message_exporting_obj">Exporting OBJ…</string>
+    <string name="message_exporting_object">Exporting object…</string>
+    <string name="message_failed_to_load_data">Failed to load data</string>
+    <string name="message_first_open_tip">Tip: long-press an item for actions (export/import).</string>
+    <string name="message_import_failed">Import failed:\n%s</string>
+    <string name="message_import_not_available_for_this_type">Import not available for this type.</string>
+    <string name="message_import_only_supports_editable_text_json_objects_for_now">Import only supports editable text/json objects for now.</string>
+    <string name="message_imported">Imported</string>
+    <string name="message_importing">Importing…</string>
+    <string name="message_invalid_json">Invalid JSON. Must be a JSON object (starts with { … }).</string>
+    <string name="message_loading_actions">Loading actions…</string>
+    <string name="message_no_recents">No recents.</string>
+    <string name="message_not_implemented">Not implemented</string>
+    <string name="message_object_type_not_editable">This object type is not editable.</string>
+    <string name="message_open_a_bundle_to_begin">Open a bundle to begin.</string>
+    <string name="message_preparing_export">Preparing export…</string>
+    <string name="message_preview_failed_add">Preview failed: %s</string>
+    <string name="message_recent_file_missing">Recent file missing.</string>
+    <string name="message_reload_failed">Reload failed.</string>
+    <string name="message_remove">Remove: %s</string>
+    <string name="message_removed">Removed.</string>
+    <string name="message_rescanning">Rescanning…</string>
+    <string name="message_saving">Saving…</string>
+    <string name="message_save_failed">Save failed</string>
+    <string name="message_scan_failed">Scan failed.</string>
+    <string name="message_scan_failed_add">Scan failed:\n%s</string>
+    <string name="message_scanning">Scanning…</string>
+    <string name="message_select_png_to_import">Select png to import</string>
+    <string name="message_type_not_supported">%s not supported</string>
+
+    <string name="text_cancel">Cancel</string>
+    <string name="text_close">Close</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_manage">Manage</string>
+    <string name="text_object_mesh">Mesh</string>
+    <string name="text_replace">Replace</string>
+    <string name="text_saved">Saved</string>
+
+    <string name="title_close_viewer">Close viewer?</string>
+    <string name="title_edit_object">Edit Object</string>
+    <string name="title_filter">Filter</string>
+    <string name="title_manage_recents">Manage recents</string>
+    <string name="title_open_bundle">Open bundle</string>
+    <string name="title_replace_current_file">Replace current file?</string>
+    <string name="title_unnamed_asset">Unnamed asset</string>
+    <string name="menu_decryption_key">Decryption Key</string>
+</resources>

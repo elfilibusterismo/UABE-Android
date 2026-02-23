@@ -1,0 +1,9 @@
+[submodule "third_party/UnityPy"]
+	path = third_party/UnityPy
+	url = https://github.com/K0lb3/UnityPy.git
+[submodule "third_party/astcenc"]
+	path = third_party/astcenc
+	url = https://github.com/ARM-software/astc-encoder.git
+[submodule "third_party/etcpak"]
+	path = third_party/etcpak
+	url = https://github.com/wolfpld/etcpak.git

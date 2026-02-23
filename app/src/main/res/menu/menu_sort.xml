@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_sort_idx"
+        android:checked="true"
+        android:title="@string/menu_sort_idx" />
+
+    <item
+        android:id="@+id/action_sort_name"
+        android:title="@string/menu_sort_name" />
+
+    <item
+        android:id="@+id/action_sort_type"
+        android:title="@string/menu_sort_type" />
+
+    <item
+        android:id="@+id/action_sort_size"
+        android:title="@string/menu_sort_size" />
+
+    <item
+        android:id="@+id/action_sort_edited"
+        android:title="@string/menu_sort_edited" />
+</menu>

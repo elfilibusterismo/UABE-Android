@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="45"
+                android:startColor="@color/uabe_icon_bg_start"
+                android:endColor="@color/uabe_icon_bg_end"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <item android:insetLeft="18dp" android:insetTop="18dp"
+          android:insetRight="18dp" android:insetBottom="18dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke android:width="2dp" android:color="@color/uabe_icon_ring" />
+        </shape>
+    </item>
+</layer-list>
