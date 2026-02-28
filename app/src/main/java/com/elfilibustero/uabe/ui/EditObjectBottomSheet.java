@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.elfilibustero.f3d.F3dNative;
 import com.elfilibustero.f3d.MainView;
 import com.elfilibustero.uabe.R;
 import com.elfilibustero.uabe.databinding.BottomsheetEditObjectBinding;
@@ -133,6 +134,15 @@ public class EditObjectBottomSheet extends BottomSheetDialogFragment {
                     Toast.LENGTH_SHORT).show();
             dismiss();
             return;
+        }
+
+        if ("Mesh".equals(supportedTypes.getName())) {
+            if (!F3dNative.isAvailable(requireContext())) {
+                Toast.makeText(requireContext(),
+                        "Not supported on this device",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         unityPyRepository.getObjectData(sessionId, idx)
