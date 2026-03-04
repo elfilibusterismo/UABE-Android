@@ -150,14 +150,18 @@ public class EditObjectBottomSheet extends BottomSheetDialogFragment {
 
                     setLoading(false, null);
                     String data = new String(result.getData(), StandardCharsets.UTF_8);
+                    boolean isDataEmpty = data.isEmpty();
+
                     b.tilText.setVisibility(View.VISIBLE);
                     b.btnSave.setVisibility(View.VISIBLE);
                     b.txt2dContainer.setVisibility(View.GONE);
                     b.modelContainer.setVisibility(View.GONE);
 
                     b.etText.setText(data);
+                    b.etText.setEnabled(!isDataEmpty);
+                    b.tilText.setHint(!isDataEmpty ? "Object data" : "Editing for this object is not supported");
                     setLoading(false, null);
-                    b.btnSave.setEnabled(true);
+                    b.btnSave.setEnabled(!isDataEmpty);
                 })
                 .addOnFailureListener(e -> {
                     setLoading(false, null);
