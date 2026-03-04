@@ -247,7 +247,6 @@ public final class UnityPyBridge {
                 return ok(null);
             }
 
-
             try {
                 String jsonText = decodeBytesToText(dataBytes).trim();
                 if (jsonText.isEmpty()) {
@@ -388,8 +387,7 @@ public final class UnityPyBridge {
         return switch (type) {
             case "TextAsset" -> "text/plain";
             case "Texture2D" -> "image/png";
-            case "MonoBehaviour", "GameObject", "AssetBundle" -> "application/json";
-            default -> "application/octet-stream";
+            default -> "application/json";
         };
     }
 
