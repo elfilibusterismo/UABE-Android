@@ -105,7 +105,7 @@ public class DocumentUtil {
     }
 
     @NonNull
-    public static byte[] readBytesFromUri(@NonNull Context ctx, @NonNull Uri src, int maxBytes)
+    public static byte[] readBytesFromUri(@NonNull Context ctx, @NonNull Uri src)
             throws Exception {
         try (InputStream in = ctx.getContentResolver().openInputStream(src)) {
             if (in == null) {
@@ -115,13 +115,8 @@ public class DocumentUtil {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buf = new byte[1024 * 64];
             int r;
-            int total = 0;
 
             while ((r = in.read(buf)) != -1) {
-                total += r;
-                if (maxBytes > 0 && total > maxBytes) {
-                    throw new RuntimeException("File too large.");
-                }
                 bos.write(buf, 0, r);
             }
             return bos.toByteArray();

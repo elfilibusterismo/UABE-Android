@@ -223,7 +223,7 @@ public final class UnityPyBridge {
             assert s != null;
             PyObject obj = getObject(s.env, idx);
 
-            byte[] dataBytes = DocumentUtil.readBytesFromUri(context, uri, 1024 * 1024);
+            byte[] dataBytes = DocumentUtil.readBytesFromUri(context, uri);
 
             String t = tname(obj);
             if ("Texture2D".equals(t)) {
