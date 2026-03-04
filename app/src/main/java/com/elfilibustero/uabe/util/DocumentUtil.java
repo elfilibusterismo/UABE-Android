@@ -25,11 +25,15 @@ public class DocumentUtil {
             c = ctx.getContentResolver().query(uri, null, null, null, null);
             if (c != null && c.moveToFirst()) {
                 int idx = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                if (idx >= 0) name = c.getString(idx);
+                if (idx >= 0) {
+                    name = c.getString(idx);
+                }
             }
         } catch (Exception ignored) {
         } finally {
-            if (c != null) c.close();
+            if (c != null) {
+                c.close();
+            }
         }
         return name;
     }
@@ -38,7 +42,9 @@ public class DocumentUtil {
         try (InputStream in = new FileInputStream(src);
              OutputStream out = ctx.getContentResolver().openOutputStream(dest, getMode())) {
 
-            if (out == null) throw new RuntimeException("Failed to open output stream");
+            if (out == null) {
+                throw new RuntimeException("Failed to open output stream");
+            }
 
             byte[] buf = new byte[1024 * 256];
             int r;
@@ -59,7 +65,9 @@ public class DocumentUtil {
         dir.mkdirs();
 
         String safe = displayName.replaceAll("[\\\\/:*?\"<>|\\n\\r\\t]", "_").trim();
-        if (safe.isEmpty()) safe = "bundle";
+        if (safe.isEmpty()) {
+            safe = "bundle";
+        }
 
         String outName = safe + "_" + UUID.randomUUID().toString().substring(0, 8);
 
@@ -68,7 +76,9 @@ public class DocumentUtil {
         try (InputStream in = ctx.getContentResolver().openInputStream(uri);
              FileOutputStream fos = new FileOutputStream(out)) {
 
-            if (in == null) throw new RuntimeException("Failed to open input stream");
+            if (in == null) {
+                throw new RuntimeException("Failed to open input stream");
+            }
 
             byte[] buf = new byte[1024 * 1024];
             int n;
@@ -82,17 +92,25 @@ public class DocumentUtil {
             throw new RuntimeException(e);
         }
     }
-    public static void writeBytesToUri(@NonNull Context ctx, @NonNull Uri dest, @NonNull byte[] bytes) throws Exception {
+
+    public static void writeBytesToUri(@NonNull Context ctx, @NonNull Uri dest, @NonNull byte[] bytes)
+            throws Exception {
         try (OutputStream out = ctx.getContentResolver().openOutputStream(dest, getMode())) {
-            if (out == null) throw new RuntimeException("Failed to open output stream");
+            if (out == null) {
+                throw new RuntimeException("Failed to open output stream");
+            }
             out.write(bytes);
             out.flush();
         }
     }
+
     @NonNull
-    public static byte[] readBytesFromUri(@NonNull Context ctx, @NonNull Uri src, int maxBytes) throws Exception {
+    public static byte[] readBytesFromUri(@NonNull Context ctx, @NonNull Uri src, int maxBytes)
+            throws Exception {
         try (InputStream in = ctx.getContentResolver().openInputStream(src)) {
-            if (in == null) throw new RuntimeException("Failed to open input stream");
+            if (in == null) {
+                throw new RuntimeException("Failed to open input stream");
+            }
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buf = new byte[1024 * 64];
@@ -109,6 +127,7 @@ public class DocumentUtil {
             return bos.toByteArray();
         }
     }
+
     @NonNull
     private static String getMode() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
