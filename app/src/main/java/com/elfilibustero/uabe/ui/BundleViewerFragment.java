@@ -29,7 +29,6 @@ import com.elfilibustero.uabe.databinding.EditTextItemBinding;
 import com.elfilibustero.uabe.databinding.FragmentBundleViewerBinding;
 import com.elfilibustero.uabe.enums.PendingKind;
 import com.elfilibustero.uabe.enums.SortMode;
-import com.elfilibustero.uabe.enums.SupportedTypes;
 import com.elfilibustero.uabe.model.ObjectItem;
 import com.elfilibustero.uabe.model.RecentBundle;
 import com.elfilibustero.uabe.python.repo.OpenBundleResult;
@@ -319,12 +318,6 @@ public class BundleViewerFragment extends Fragment {
 
         pendingActionItem = item;
 
-        SupportedTypes supportedTypes = SupportedTypes.fromName(item.getType());
-        if (supportedTypes == null) {
-            toast(getString(R.string.message_type_not_supported, item.getType()));
-            return;
-        }
-
         vm.requestObjectActions(item);
     }
 
@@ -336,22 +329,12 @@ public class BundleViewerFragment extends Fragment {
 
         pendingActionItem = item;
 
-        SupportedTypes supportedTypes = SupportedTypes.fromName(item.getType());
-        if (supportedTypes == null) {
-            toast(getString(R.string.message_type_not_supported, item.getType()));
-            return;
-        }
-
         String file = st.filename() + "." + st.ext();
 
         ArrayList<String> actionItems = new ArrayList<>();
         actionItems.add("Edit/Preview");
-        if (supportedTypes.canExport()) {
-            actionItems.add(getString(R.string.action_export_add, st.ext()));
-        }
-        if (supportedTypes.canImport()) {
-            actionItems.add(getString(R.string.action_import_add, st.ext()));
-        }
+        actionItems.add(getString(R.string.action_export_add, st.ext()));
+        actionItems.add(getString(R.string.action_import_add, st.ext()));
         String[] actions = actionItems.toArray(new String[0]);
 
         final String title = safe(item.getName()).isEmpty()
@@ -378,12 +361,6 @@ public class BundleViewerFragment extends Fragment {
         String sid = vm.getSessionId().getValue();
         if (sid == null || sid.isEmpty()) {
             Log.d("Editor", "Session ID is empty");
-            return;
-        }
-
-        SupportedTypes supportedTypes = SupportedTypes.fromName(item.getType());
-        if (supportedTypes == null) {
-            toast(getString(R.string.message_type_not_supported, item.getType()));
             return;
         }
 

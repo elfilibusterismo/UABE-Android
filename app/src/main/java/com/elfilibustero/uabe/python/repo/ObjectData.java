@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.elfilibustero.uabe.enums.SupportedTypes;
 import com.google.gson.annotations.SerializedName;
 
 public class ObjectData implements Parcelable {
@@ -117,10 +116,6 @@ public class ObjectData implements Parcelable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public SupportedTypes getSupportedType() {
-        return SupportedTypes.fromName(type);
     }
 
     @Nullable

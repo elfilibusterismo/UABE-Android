@@ -20,7 +20,6 @@ import com.elfilibustero.f3d.F3dNative;
 import com.elfilibustero.f3d.MainView;
 import com.elfilibustero.uabe.R;
 import com.elfilibustero.uabe.databinding.BottomsheetEditObjectBinding;
-import com.elfilibustero.uabe.enums.SupportedTypes;
 import com.elfilibustero.uabe.python.repo.ObjectData;
 import com.elfilibustero.uabe.python.repo.UnityPyRepositoryImpl;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -128,15 +127,8 @@ public class EditObjectBottomSheet extends BottomSheetDialogFragment {
 
     private void loadDataOnly() {
         setLoading(true, "Loading…");
-        SupportedTypes supportedTypes = SupportedTypes.fromName(type);
-        if (supportedTypes == null) {
-            Toast.makeText(requireContext(), R.string.message_type_not_supported,
-                    Toast.LENGTH_SHORT).show();
-            dismiss();
-            return;
-        }
 
-        if ("Mesh".equals(supportedTypes.getName())) {
+        if ("Mesh".equals(type)) {
             if (!F3dNative.isAvailable(requireContext())) {
                 Toast.makeText(requireContext(),
                         "Not supported on this device",
@@ -147,40 +139,21 @@ public class EditObjectBottomSheet extends BottomSheetDialogFragment {
 
         unityPyRepository.getObjectData(sessionId, idx)
                 .addOnSuccessListener(result -> {
-                    switch (result.getSupportedType()) {
-                        case MESH:
+                    switch (type) {
+                        case "Mesh":
                             loadModel(result);
                             return;
-                        case TEXTURE_2D:
+                        case "Texture2D":
                             loadTexture2d(result);
                             return;
                     }
 
                     setLoading(false, null);
                     String data = new String(result.getData(), StandardCharsets.UTF_8);
-                    SupportedTypes supportedType = result.getSupportedType();
-                    b.tilText.setVisibility(
-                            supportedType.isEditable() ? View.VISIBLE : View.GONE);
+                    b.tilText.setVisibility(View.VISIBLE);
+                    b.btnSave.setVisibility(View.VISIBLE);
                     b.txt2dContainer.setVisibility(View.GONE);
-                    b.btnSave.setVisibility(
-                            supportedType.isEditable() ? View.VISIBLE : View.GONE);
                     b.modelContainer.setVisibility(View.GONE);
-
-                    if (!supportedType.isEditable()) {
-                        Toast.makeText(requireContext(),
-                                R.string.message_object_type_not_editable,
-                                Toast.LENGTH_SHORT).show();
-                        dismiss();
-                        return;
-                    }
-
-                    //dataMode = result.getMode();
-
-                    //if ("file".equals(dataMode)) {
-                    //    b.tilText.setHint(type + " typetree (JSON)");
-                    //} else {
-                    //    b.tilText.setHint(type + " content");
-                    //}
 
                     b.etText.setText(data);
                     setLoading(false, null);
