@@ -334,7 +334,9 @@ public class BundleViewerFragment extends Fragment {
         ArrayList<String> actionItems = new ArrayList<>();
         actionItems.add("Edit/Preview");
         actionItems.add(getString(R.string.action_export_add, st.ext()));
-        actionItems.add(getString(R.string.action_import_add, st.ext()));
+        if (!"Mesh".equals(item.getType())) {
+            actionItems.add(getString(R.string.action_import_add, st.ext()));
+        }
         String[] actions = actionItems.toArray(new String[0]);
 
         final String title = safe(item.getName()).isEmpty()
