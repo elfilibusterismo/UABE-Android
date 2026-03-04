@@ -190,10 +190,7 @@ public final class UnityPyBridge {
             case "TextAsset" -> exportTextAsset(obj);
             case "Texture2D" -> exportTexture2D(obj);
             case "Mesh" -> exportMesh(obj);
-            case "MonoBehaviour" -> exportMonoBehaviour(obj);
-            case "GameObject",
-                 "AssetBundle" -> exportTypeTreeJson(obj);
-            default -> new byte[0];
+            default -> exportTypeTreeJson(obj);
         };
     }
 
@@ -250,29 +247,25 @@ public final class UnityPyBridge {
                 return ok(null);
             }
 
-            if ("MonoBehaviour".equals(t) || "GameObject".equals(t) || "AssetBundle".equals(t)) {
-                try {
-                    String jsonText = decodeBytesToText(dataBytes).trim();
-                    if (jsonText.isEmpty()) {
-                        return fail("Input JSON is empty.", null);
-                    }
 
-                    Object parsed = GSON.fromJson(jsonText, Object.class);
-                    if (!(parsed instanceof Map)) {
-                        return fail("Typetree JSON must be a JSON object (dict).", null);
-                    }
-
-                    PyObject pyTree = json.callAttr("loads", jsonText);
-                    saveTypeTree(obj, pyTree);
-                    s.dirty = true;
-                    return ok(null);
-                } catch (Throwable t2) {
-                    return fail(msgOf(t2), androidTrace(t2));
+            try {
+                String jsonText = decodeBytesToText(dataBytes).trim();
+                if (jsonText.isEmpty()) {
+                    return fail("Input JSON is empty.", null);
                 }
+
+                Object parsed = GSON.fromJson(jsonText, Object.class);
+                if (!(parsed instanceof Map)) {
+                    return fail("Typetree JSON must be a JSON object (dict).", null);
+                }
+
+                PyObject pyTree = json.callAttr("loads", jsonText);
+                saveTypeTree(obj, pyTree);
+                s.dirty = true;
+                return ok(null);
+            } catch (Throwable t2) {
+                return fail(msgOf(t2), androidTrace(t2));
             }
-
-            return fail("import_object not supported for type: " + t, null);
-
         } catch (Throwable t) {
             return fail(msgOf(t), androidTrace(t));
         }
@@ -305,19 +298,16 @@ public final class UnityPyBridge {
                 s.dirty = true;
                 return ok(null);
             }
-            if ("MonoBehaviour".equals(t) || "GameObject".equals(t) || "AssetBundle".equals(t)) {
-                String jsonText = new String(data, StandardCharsets.UTF_8);
-                Object parsed = GSON.fromJson(jsonText, Object.class);
-                if (!(parsed instanceof Map)) {
-                    return fail("Typetree JSON must be a JSON object (dict).", null);
-                }
-
-                PyObject pyTree = json.callAttr("loads", jsonText);
-                saveTypeTree(obj, pyTree);
-                s.dirty = true;
-                return ok(null);
+            String jsonText = new String(data, StandardCharsets.UTF_8);
+            Object parsed = GSON.fromJson(jsonText, Object.class);
+            if (!(parsed instanceof Map)) {
+                return fail("Typetree JSON must be a JSON object (dict).", null);
             }
-            return fail("set_object_data not supported for type: " + t, null);
+
+            PyObject pyTree = json.callAttr("loads", jsonText);
+            saveTypeTree(obj, pyTree);
+            s.dirty = true;
+            return ok(null);
         } catch (Throwable t) {
             return fail(msgOf(t), androidTrace(t));
         }
@@ -420,7 +410,7 @@ public final class UnityPyBridge {
             case "Texture2D" -> "png";
             case "Mesh" -> "obj";
             case "MonoBehaviour", "GameObject", "AssetBundle" -> "json";
-            default -> "bin";
+            default -> "json";
         };
     }
 
@@ -637,7 +627,7 @@ public final class UnityPyBridge {
         return (data != null && !data.isEmpty()) ? pyBytes(data) : new byte[0];
     }
 
-    private byte[] exportMonoBehaviour(PyObject obj) {
+    private byte[] exportTypeTreeJson(PyObject obj) {
         try {
             PyObject d = obj.callAttr("parse_as_dict");
 
@@ -654,18 +644,6 @@ public final class UnityPyBridge {
         PyObject parsed = obj.callAttr("parse_as_object");
         PyObject raw = parsed.getOrDefault("get_raw_data", null);
         return (raw != null && !raw.isEmpty()) ? pyBytes(raw) : new byte[0];
-    }
-
-    private byte[] exportTypeTreeJson(@NonNull PyObject obj) {
-        PyObject d = obj.callAttr("parse_as_dict");
-
-        String jsonText = json.callAttr(
-                "dumps",
-                d,
-                new Kwarg("ensure_ascii", false),
-                new Kwarg("indent", 2)
-        ).toString();
-        return jsonText.getBytes(StandardCharsets.UTF_8);
     }
 
     @NonNull
