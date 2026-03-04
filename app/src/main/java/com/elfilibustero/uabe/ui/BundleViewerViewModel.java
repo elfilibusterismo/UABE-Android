@@ -435,10 +435,7 @@ public class BundleViewerViewModel extends AndroidViewModel {
                     throw new RuntimeException("Input file does not exist");
                 }
 
-                if (DocumentUtil.copyFileToUri(getApplication().getApplicationContext(), src, dest)) {
-                    //noinspection ResultOfMethodCallIgnored
-                    src.delete();
-                }
+                DocumentUtil.copyFileToUri(getApplication().getApplicationContext(), src, dest);
             } catch (Exception e) {
                 err = e.getMessage();
             }
