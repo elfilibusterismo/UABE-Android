@@ -73,11 +73,14 @@ public class BundleViewerFragment extends Fragment {
         createDocLauncher = registerForActivityResult(
                 new ActivityResultContracts.CreateDocument("*/*"),
                 uri -> {
-                    if (uri == null || pendingActionItem == null) {
+                    if (uri == null) {
                         return;
                     }
 
                     if (pendingExportKind == PendingKind.OBJECT) {
+                        if (pendingActionItem == null) {
+                            return;
+                        }
                         vm.exportObjectToUri(
                                 uri,
                                 pendingActionItem.getIndex(),
