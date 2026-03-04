@@ -461,6 +461,10 @@ public final class UnityPyBridge {
     @NonNull
     private String extractName(PyObject obj) {
         try {
+            PyObject peekName = obj.callAttr("peek_name");
+            if (peekName != null && !peekName.isEmpty()) {
+                return peekName.toString();
+            }
             PyObject parsed = obj.callAttr("parse_as_object");
             if (parsed != null) {
                 PyObject mNameObject = parsed.get("m_Name");
